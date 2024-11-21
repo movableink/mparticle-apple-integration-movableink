@@ -1,0 +1,25 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "MovableInk",
+        "repositoryURL": "https://github.com/movableink/ios-sdk",
+        "state": {
+          "branch": null,
+          "revision": "b43e29856a0ad171d9d98697b7afcc46ca8731c4",
+          "version": "1.7.1"
+        }
+      },
+      {
+        "package": "mParticle-Apple-SDK",
+        "repositoryURL": "https://github.com/mParticle/mparticle-apple-sdk",
+        "state": {
+          "branch": null,
+          "revision": "4e0c640962f6a8254066876bade310329a36c4a7",
+          "version": "8.27.1"
+        }
+      }
+    ]
+  },
+  "version": 1
+}
