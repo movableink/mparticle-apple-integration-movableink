@@ -23,18 +23,23 @@ typedef enum {
  mParticle will supply a unique kit code for you. Please contact our team
  */
 + (NSNumber *)kitCode {
-  return @179;
+  // return @179;
+  return @-1;
 }
 
-+ (void)load {
-  MPKitRegister *kitRegister = [[MPKitRegister alloc] initWithName:@"MovableInk" className:@"MPKitMovableInk"];
-  BOOL success = [MParticle registerExtension:kitRegister];
-  
-  NSLog(@"REGISTERING KIT - %d", success);
+- (NSNumber *)sideloadedKitCode {
+  return @0;
 }
+
+//+ (void)load {
+//  MPKitRegister *kitRegister = [[MPKitRegister alloc] initWithName:@"MovableInk" className:@"MPKitMovableInk"];
+//  BOOL success = [MParticle registerExtension:kitRegister];
+//  
+//  NSLog(@"REGISTERING KIT - %d", success);
+//}
 
 - (MPKitExecStatus *)execStatus:(MPKitReturnCode)returnCode {
-  return [[MPKitExecStatus alloc] initWithSDKCode:self.class.kitCode returnCode:returnCode];
+  return [[MPKitExecStatus alloc] initWithSDKCode:self.sideloadedKitCode returnCode:returnCode];
 }
 
 #pragma mark - MPKitInstanceProtocol methods
@@ -42,18 +47,18 @@ typedef enum {
 #pragma mark Kit instance and lifecycle
 
 - (nonnull MPKitExecStatus *)didFinishLaunchingWithConfiguration:(nonnull NSDictionary *)configuration {
-  self.configuration = configuration;
-  
-  NSLog(@"configuration: %@", configuration);
-  
-  NSString *apiKey = configuration[miAPIKey];
-  NSString *domainsString = configuration[miDomains];
-  
-  if (!apiKey || !domainsString) {
-    return [self execStatus:MPKitReturnCodeRequirementsNotMet];
-  }
-  
-  _configuration = configuration;
+//  self.configuration = configuration;
+//  
+//  NSLog(@"configuration: %@", configuration);
+//  
+//  NSString *apiKey = configuration[miAPIKey];
+//  NSString *domainsString = configuration[miDomains];
+//  
+//  if (!apiKey || !domainsString) {
+//    // return [self execStatus:MPKitReturnCodeRequirementsNotMet];
+//  }
+//  
+//  _configuration = configuration;
   
   [self start];
   
@@ -66,9 +71,9 @@ typedef enum {
   dispatch_once(&kitPredicate, ^{
     NSArray *domains = [self.configuration[miDomains] componentsSeparatedByString:@","];
     
-    [MIClient startWithApiKey:self.configuration[miAPIKey]
-                       region: BehaviorEventRegionUs
-              deeplinkDomains:domains
+    [MIClient startWithApiKey:nil
+                       region:BehaviorEventRegionUs
+              deeplinkDomains:@[]
                 launchOptions:nil
                        result:^(NSString * _Nullable clickthrough, NSError * _Nullable error) {
       MPAttributionResult *attributionResult = [[MPAttributionResult alloc] init];
@@ -84,13 +89,13 @@ typedef enum {
     
     self->_started = YES;
     
-    dispatch_async(dispatch_get_main_queue(), ^{
-      NSDictionary *userInfo = @{mParticleKitInstanceKey:[[self class] kitCode]};
-      
-      [[NSNotificationCenter defaultCenter] postNotificationName:mParticleKitDidBecomeActiveNotification
-                                                          object:nil
-                                                        userInfo:userInfo];
-    });
+//    dispatch_async(dispatch_get_main_queue(), ^{
+//      NSDictionary *userInfo = @{mParticleKitInstanceKey:[[self class] kitCode]};
+//      
+//      [[NSNotificationCenter defaultCenter] postNotificationName:mParticleKitDidBecomeActiveNotification
+//                                                          object:nil
+//                                                        userInfo:userInfo];
+//    });
   });
 }
 

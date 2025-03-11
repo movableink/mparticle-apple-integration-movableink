@@ -14,7 +14,7 @@ let package = Package(
     ],
     dependencies: [
       .package(url: "https://github.com/mParticle/mparticle-apple-sdk", from: "8.0.0"),
-      .package(url: "https://github.com/movableink/ios-sdk", from: "1.7.1")
+      .package(url: "https://github.com/movableink/ios-sdk", from: "1.7.3")
     ],
     targets: [
         .target(
