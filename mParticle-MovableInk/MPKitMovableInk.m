@@ -16,6 +16,7 @@ typedef enum {
 - (instancetype _Nonnull) init {
   self = [super init];
   self.configuration = @{};
+  self.sideloadedKitCode = @0;
   return self;
 }
 
@@ -25,10 +26,6 @@ typedef enum {
 + (NSNumber *)kitCode {
   // return @179;
   return @-1;
-}
-
-- (NSNumber *)sideloadedKitCode {
-  return @0;
 }
 
 //+ (void)load {

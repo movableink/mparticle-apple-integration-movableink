@@ -25,5 +25,6 @@
 @property (nonatomic, strong, nullable) NSDictionary *launchOptions;
 @property (nonatomic, unsafe_unretained, readonly) BOOL started;
 @property (nonatomic, strong, nullable) MPKitAPI *kitApi;
+@property (nonatomic, strong, nonnull) NSNumber *sideloadedKitCode;
 
 @end
