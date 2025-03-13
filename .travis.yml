@@ -1,0 +1,9 @@
+osx_image: xcode15
+language: objective-c
+script:
+- sudo gem install cocoapods -v 1.5.3
+- travis_retry pod repo update > /dev/null
+- pod lib lint --use-libraries --allow-warnings || pod lib lint --allow-warnings
+- carthage update
+- carthage build --no-skip-current && carthage archive
+- xcodebuild -project mParticle-MovableInk.xcodeproj -scheme mParticle_MovableInkTests -destination 'platform=iOS Simulator,OS=18.0,name=iPhone 16' test
